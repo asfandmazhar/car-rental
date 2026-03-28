@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextRequest } from "next/server";
+export const dynamic = "force-dynamic";
 
 connectDB();
 
@@ -71,9 +72,9 @@ export async function POST(request: NextRequest) {
     };
 
     // Sign JWT
-    const token = jwt.sign(tokenPayload, process.env.TOKEN_SECRET as string, {
-      expiresIn: "7d",
-    });
+    const secret = process.env.TOKEN_SECRET || "default_dev_secret";
+
+    const token = jwt.sign(tokenPayload, secret, { expiresIn: "7d" });
 
     // Create response
     const response = NextResponse.json({

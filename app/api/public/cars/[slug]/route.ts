@@ -1,15 +1,16 @@
 import { connectDB } from "@/config/dbConfig";
 import Car from "@/models/carModel";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } },
+  context: { params: Promise<{ slug: string }> },
 ): Promise<NextResponse> {
   try {
     await connectDB();
 
-    const { slug } = await params; // no need for await here
+    const { slug } = await context.params;
 
     if (!slug) {
       return NextResponse.json(

@@ -51,7 +51,7 @@ export default function Services() {
               <div className="bg-overlay rounded-12 overflow-hidden">
                 <img
                   className="w-100 h-100 img-banner"
-                  src="/assets/imgs/page-header/banner1.png"
+                  src="/assets/imgs/banners/service/over-service-second.jpg"
                   alt="Carento"
                 />
               </div>
@@ -482,14 +482,14 @@ export default function Services() {
                           <SwiperSlide className="swiper-slide">
                             <img
                               className="rounded-12"
-                              src="/assets/imgs/cta/cta-10/img-1.png"
+                              src="/assets/imgs/banners/service/1.jpg"
                               alt="Carento"
                             />
                           </SwiperSlide>
                           <SwiperSlide className="swiper-slide">
                             <img
                               className="rounded-12"
-                              src="/assets/imgs/cta/cta-10/img-1.png"
+                              src="/assets/imgs/banners/service/1.jpg"
                               alt="Carento"
                             />
                           </SwiperSlide>

@@ -3,6 +3,7 @@ import User from "@/models/userModel";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+export const dynamic = "force-dynamic";
 
 // Connect to MongoDB
 connectDB();
@@ -23,7 +24,7 @@ export async function POST(request: Request) {
     if (!fullName?.trim() || !email?.trim() || !password?.trim()) {
       return NextResponse.json(
         { success: false, message: "All fields are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
           success: false,
           message: "Full name must be at least 3 characters long.",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { success: false, message: "Invalid email format." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -51,7 +52,7 @@ export async function POST(request: Request) {
           success: false,
           message: "Password must be at least 8 characters long.",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -60,7 +61,7 @@ export async function POST(request: Request) {
     if (existingUser) {
       return NextResponse.json(
         { success: false, message: "User already exists." },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
@@ -91,9 +92,9 @@ export async function POST(request: Request) {
     };
 
     // Sign JWT
-    const token = jwt.sign(tokenPayload, process.env.TOKEN_SECRET, {
-      expiresIn: "7d",
-    });
+    const secret = process.env.TOKEN_SECRET || "default_dev_secret";
+
+    const token = jwt.sign(tokenPayload, secret, { expiresIn: "7d" });
 
     // Create response
     const response = NextResponse.json({
@@ -112,7 +113,7 @@ export async function POST(request: Request) {
     console.error("Registration Error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

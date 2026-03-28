@@ -1,6 +1,7 @@
 import { connectDB } from "@/config/dbConfig";
 import Booking from "@/models/bookingModel";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function PUT(request: Request) {
   try {

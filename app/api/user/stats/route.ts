@@ -1,6 +1,7 @@
 import { connectDB } from "@/config/dbConfig";
 import User from "@/models/userModel";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {

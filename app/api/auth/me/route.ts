@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { connectDB } from "@/config/dbConfig";
 import User from "@/models/userModel";
+export const dynamic = "force-dynamic";
 
 connectDB();
 
@@ -28,12 +29,10 @@ export async function GET(request: NextRequest) {
     // Verify JWT and typecast
     const decoded = jwt.verify(
       token,
-      process.env.TOKEN_SECRET as string
+      process.env.TOKEN_SECRET as string,
     ) as TokenPayload;
 
-    const user = await User.findById(decoded.id).select(
-      "-password -__v -_id"
-    );
+    const user = await User.findById(decoded.id).select("-password -__v -_id");
 
     if (!user) {
       return NextResponse.json({ isLoggedIn: false });

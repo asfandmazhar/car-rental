@@ -2,6 +2,7 @@ import { connectDB } from "@/config/dbConfig";
 import Category from "@/models/categoryModel";
 import { NextResponse } from "next/server";
 import slugify from "slugify";
+export const dynamic = "force-dynamic";
 
 interface RegisterRequestBody {
   imgURL: string;

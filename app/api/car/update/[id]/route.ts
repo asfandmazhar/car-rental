@@ -1,7 +1,8 @@
 import { connectDB } from "@/config/dbConfig";
 import Car from "@/models/carModel";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
+export const dynamic = "force-dynamic";
 
 interface UpdateRequestBody {
   images: string[];
@@ -18,13 +19,12 @@ interface UpdateRequestBody {
 }
 
 export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } },
-) {
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> },
+): Promise<NextResponse> {
   try {
     await connectDB();
-
-    const { id } = await params;
+    const { id } = await context.params;
 
     const body: UpdateRequestBody = await request.json();
 

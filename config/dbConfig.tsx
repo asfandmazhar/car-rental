@@ -1,29 +1,55 @@
 import mongoose from "mongoose";
 
-export const connectDB = async (): Promise<void> => {
-  try {
-    if (!process.env.MONGO_URI) {
-      throw new Error("MONGO_URI is not defined in environment variables.");
-    }
+const MONGO_URI = process.env.MONGO_URI;
 
-    await mongoose.connect(process.env.MONGO_URI);
+// We use a global object to cache the connection in dev mode
+declare global {
+  // eslint-disable-next-line no-var
+  var mongooseCache: {
+    conn: typeof mongoose | null;
+    promise: Promise<typeof mongoose> | null;
+  };
+}
 
-    mongoose.connection.on("connected", () => {
-      console.log("✅ Database connected successfully!");
-    });
+if (!global.mongooseCache) {
+  global.mongooseCache = { conn: null, promise: null };
+}
 
-    mongoose.connection.on("error", (err) => {
-      console.error(
-        "❌ Database connection error. Make sure MongoDB is running.",
-        err,
-      );
-      process.exit(1);
-    });
-  } catch (error) {
-    console.error(
-      "⚠️ Something went wrong while connecting to the database:",
-      error,
-    );
-    process.exit(1);
+export const connectDB = async (): Promise<typeof mongoose> => {
+  if (!MONGO_URI) {
+    throw new Error("MONGO_URI is not defined in environment variables.");
   }
+
+  // Reuse existing connection if available
+  if (global.mongooseCache.conn) {
+    return global.mongooseCache.conn;
+  }
+
+  if (!global.mongooseCache.promise) {
+    global.mongooseCache.promise = mongoose
+      .connect(MONGO_URI)
+      .then((mongooseInstance) => {
+        // Attach listeners only once
+        if (!mongoose.connection.listeners("connected").length) {
+          mongoose.connection.on("connected", () => {
+            console.log("✅ Database connected successfully!");
+          });
+        }
+
+        if (!mongoose.connection.listeners("error").length) {
+          mongoose.connection.on("error", (err) => {
+            console.error(
+              "❌ Database connection error. Make sure MongoDB is running.",
+              err,
+            );
+            process.exit(1);
+          });
+        }
+
+        return mongooseInstance;
+      });
+  }
+
+  global.mongooseCache.conn = await global.mongooseCache.promise;
+  return global.mongooseCache.conn;
 };

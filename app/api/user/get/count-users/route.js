@@ -2,6 +2,7 @@ import { connectDB } from "@/config/dbConfig";
 import { getUserFromToken } from "@/helpers/getUserFromToken";
 import User from "@/models/userModel";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 connectDB();
 

@@ -56,10 +56,10 @@ export default function Contact() {
       <div>
         <div className="page-header pt-30 background-body">
           <div className="custom-container position-relative mx-auto">
-            <div className="bg-overlay rounded-12 overflow-hidden">
+            <div className="rounded-12 overflow-hidden">
               <img
                 className="w-100 h-100 rounded-12 img-banner"
-                src="/assets/imgs/page-header/banner4.png"
+                src="/assets/imgs/banners/contact/contact-us.jpg"
                 alt="Carento"
               />
             </div>

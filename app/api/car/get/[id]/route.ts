@@ -2,6 +2,7 @@ import { connectDB } from "@/config/dbConfig";
 import { getUserFromToken } from "@/helpers/getUserFromToken";
 import Car from "@/models/carModel";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 interface TokenUser {
   _id: string;
@@ -10,7 +11,7 @@ interface TokenUser {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  context: { params: Promise<{ id: string }> },
 ): Promise<NextResponse> {
   try {
     await connectDB();
@@ -31,7 +32,7 @@ export async function GET(
       );
     }
 
-    const { id } = await params;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json(

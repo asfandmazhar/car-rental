@@ -139,17 +139,6 @@ export default function AdminDashboard() {
           "bg-success",
           "/admin/cars",
         )}
-
-        {renderCard(
-          "Bookings",
-          30,
-          [
-            { label: "Confirmed", value: 10 },
-            { label: "Pending", value: 20 },
-          ],
-          "bg-warning",
-          "/admin/booking",
-        )}
       </div>
 
       {/* Modal */}

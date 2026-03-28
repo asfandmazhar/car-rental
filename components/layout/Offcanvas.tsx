@@ -46,18 +46,20 @@ export default function Offcanvas({
         className={`sidebar-canvas-wrapper perfect-scrollbar button-bg-2 ${isOffcanvas ? "sidebar-canvas-visible" : ""}`}
       >
         <div className="sidebar-canvas-container">
-          <div className="sidebar-canvas-head">
+          <div className="sidebar-canvas-head p-4">
             <div className="sidebar-canvas-logo">
               <Link className="d-flex" href="/">
                 <img
                   className="light-mode"
                   alt="Carento"
-                  src="/assets/imgs/template/logo-d.svg"
+                  src="/assets/imgs/logo-dark.png"
+                  style={{ width: "8rem" }}
                 />
                 <img
                   className="dark-mode"
                   alt="Carento"
-                  src="/assets/imgs/template/logo-w.svg"
+                  src="/assets/imgs/logo.png"
+                  style={{ width: "8rem" }}
                 />
               </Link>
             </div>
@@ -110,7 +112,9 @@ export default function Offcanvas({
                   Carrer Francesc Macià, 95, <br /> 08830 Sant Boi de Llobregat,
                   Barcelona
                 </p>
-                <p className="hour-work-2 text-md-medium neutral-1000">info@</p>
+                <p className="hour-work-2 text-md-medium neutral-1000">
+                  info@luxentina.com
+                </p>
                 <p className="email-2 text-md-medium neutral-1000"></p>
               </div>
               <hr />
@@ -124,20 +128,6 @@ export default function Offcanvas({
                   target="_blank"
                 >
                   <RiInstagramFill />
-                </Link>
-                <Link
-                  href="instagram.com"
-                  className="fs-4 opacity-75"
-                  target="_blank"
-                >
-                  <BsTwitterX />
-                </Link>
-                <Link
-                  href="instagram.com"
-                  className="fs-4 opacity-75"
-                  target="_blank"
-                >
-                  <FaFacebook />
                 </Link>
               </div>
             </div>

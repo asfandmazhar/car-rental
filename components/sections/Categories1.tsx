@@ -48,8 +48,8 @@ export default function Categories1() {
           </div>
           <div className="col-md-4">
             <div className="d-flex justify-content-md-end mt-md-0 mt-4">
-              <Link className="btn btn-primary" href="/cars-list">
-                View More
+              <Link className="btn btn-primary" href="/booking">
+                Book Now
                 <svg
                   width={16}
                   height={16}

@@ -117,7 +117,7 @@ export default function CarsList4() {
               <div className="bg-overlay rounded-12 overflow-hidden">
                 <img
                   className="w-100 h-100 img-fluid img-banner"
-                  src="/assets/imgs/page-header/banner6.png"
+                  src="/assets/imgs/banners/car-list.jpg"
                   alt="Carento"
                 />
               </div>
@@ -131,32 +131,17 @@ export default function CarsList4() {
                 <span className="text-white text-lg-medium">
                   Search and find your best car rental with easy way
                 </span>
+                <div className="d-flex gap-2 justify-content-center mt-4">
+                  <Link className="btn btn-primary" href="/booking">
+                    Book Now
+                  </Link>
+                  <Link className="btn btn-primary bg-white" href="/contact">
+                    Contact
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-          {/* search 1 */}
-          <section className="box-section box-search-advance-home10 background-body">
-            <div className="container">
-              <div className="box-search-advance background-card wow fadeIn">
-                <div className="box-top-search">
-                  <div className="left-top-search">
-                    <button className="category-link text-sm-bold btn-click active border-0">
-                      Distance
-                    </button>
-                  </div>
-                  <div className="right-top-search d-none d-md-flex">
-                    <Link
-                      className="text-sm-medium need-some-help"
-                      href="/contact"
-                    >
-                      Need help?
-                    </Link>
-                  </div>
-                </div>
-                <HeroSearch />
-              </div>
-            </div>
-          </section>
           {/* cars-listing-1 */}
           <section className="section-box pt-50 background-body">
             <div className="container">

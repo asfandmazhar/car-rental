@@ -2,6 +2,7 @@ import { connectDB } from "@/config/dbConfig";
 import Booking from "@/models/bookingModel";
 import { NextResponse } from "next/server";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+export const dynamic = "force-dynamic";
 
 interface BookingRequestBody {
   fullName: string;

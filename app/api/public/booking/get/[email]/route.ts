@@ -1,15 +1,16 @@
 import { connectDB } from "@/config/dbConfig";
 import Booking from "@/models/bookingModel";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { email: string } },
+  context: { params: Promise<{ email: string }> },
 ): Promise<NextResponse> {
   try {
     await connectDB();
+    const { email } = await context.params;
 
-    const { email } = await params;
     if (!email) {
       return NextResponse.json(
         { success: false, message: "Email is required" },

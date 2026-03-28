@@ -1,6 +1,7 @@
 import { connectDB } from "@/config/dbConfig";
 import Contact from "@/models/contactModel";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 interface RegisterRequestBody {
   firstName: string;

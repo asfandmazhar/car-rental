@@ -1,6 +1,7 @@
 import { connectDB } from "@/config/dbConfig";
 import Services from "@/models/servicesModel";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 interface RegisterRequestBody {
   imgURL: string;

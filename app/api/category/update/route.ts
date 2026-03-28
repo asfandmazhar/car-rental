@@ -3,6 +3,7 @@ import { getUserFromToken } from "@/helpers/getUserFromToken";
 import Category from "@/models/categoryModel";
 import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
+export const dynamic = "force-dynamic";
 
 interface TokenUser {
   _id: string;

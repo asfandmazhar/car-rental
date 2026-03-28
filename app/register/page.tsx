@@ -55,14 +55,6 @@ export default function Register() {
       });
 
       setAgree(false);
-      const subject = "Email Subject";
-      const email = formData?.email;
-      const html = `Welcome to our site!`;
-      await axios.post("/api/sendMail", {
-        subject,
-        email,
-        html,
-      });
       // Reset form
       setFormData({
         fullName: "",

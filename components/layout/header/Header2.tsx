@@ -9,6 +9,21 @@ const ThemeSwitch = dynamic(() => import("@/components/elements/ThemeSwitch"), {
   ssr: false,
 });
 
+// Extend the Window interface for TypeScript
+declare global {
+  interface Window {
+    googleTranslateElementInit: () => void;
+    google?: {
+      translate: {
+        TranslateElement: new (
+          options: Record<string, any>,
+          elementId: string,
+        ) => void;
+      };
+    };
+  }
+}
+
 export default function Header2({
   scroll,
   isMobileMenu,
@@ -52,7 +67,7 @@ export default function Header2({
       document.body.appendChild(addScript);
 
       window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement(
+        new window.google!.translate.TranslateElement(
           {
             pageLanguage: "en",
             includedLanguages: "en,de,es,it",
@@ -70,7 +85,7 @@ export default function Header2({
         className={`header sticky-bar header-home-2 ${scroll ? "stick" : ""}`}
       >
         <div className="top-bar top-bar-2 top-bar-3 @@bg">
-          <div className="container-fluid">
+          <div className="container-fluid px-4">
             <div className="text-header-info">
               {/* Phone & Email stays same */}
               <Link className="phone-head text-white" href="tel:+12225553399">
@@ -98,7 +113,7 @@ export default function Header2({
               <div id="google_translate_element" style={{ display: "none" }} />
 
               {/* Language Selector */}
-              <Dropdown className="d-none d-xl-inline-block box-dropdown-cart align-middle mr-15 head-lang">
+              <Dropdown className="d-xl-inline-block box-dropdown-cart align-middle mr-15 head-lang">
                 <Dropdown.Toggle
                   as="span"
                   className="text-14-medium icon-list icon-account icon-lang"
@@ -127,7 +142,7 @@ export default function Header2({
               </Dropdown>
 
               {/* Currency Selector */}
-              <Dropdown className="d-none d-xl-inline-block box-dropdown-cart align-middle head-currency">
+              <Dropdown className="d-xl-inline-block box-dropdown-cart align-middle head-currency">
                 <Dropdown.Toggle
                   as="span"
                   className="text-14-medium icon-list icon-cart"
@@ -155,13 +170,20 @@ export default function Header2({
         </div>
 
         {/* Main Nav Section */}
-        <div className="container-fluid background-body">
+        <div className="container-fluid background-body p-3 px-sm-5">
           <div className="main-header">
             <div className="header-left">
               <div className="header-logo">
                 <Link className="d-flex" href="/">
                   <img
-                    alt="luxentina logo"
+                    className="light-mode"
+                    alt="luxentina"
+                    src="/assets/imgs/logo-dark.png"
+                    style={{ width: "8rem" }}
+                  />
+                  <img
+                    className="dark-mode"
+                    alt="luxentina"
                     src="/assets/imgs/logo.png"
                     style={{ width: "8rem" }}
                   />
@@ -182,14 +204,14 @@ export default function Header2({
                   </ul>
                 </nav>
               </div>
-              <div className="header-right">
+              <div className="d-flex gap-2">
                 <div
                   className="burger-icon-2 burger-icon-white"
                   onClick={handleOffcanvas}
                 >
                   <img
                     src="/assets/imgs/template/icons/menu.svg"
-                    alt="Carento"
+                    alt="luxentina"
                   />
                 </div>
                 <div

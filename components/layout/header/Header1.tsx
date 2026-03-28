@@ -10,6 +10,21 @@ const ThemeSwitch = dynamic(() => import("@/components/elements/ThemeSwitch"), {
   ssr: false,
 });
 
+// Extend the Window interface for TypeScript
+declare global {
+  interface Window {
+    googleTranslateElementInit: () => void;
+    google?: {
+      translate: {
+        TranslateElement: new (
+          options: Record<string, any>,
+          elementId: string,
+        ) => void;
+      };
+    };
+  }
+}
+
 export default function Header1({
   scroll,
   handleMobileMenu,
@@ -57,7 +72,7 @@ export default function Header1({
       document.body.appendChild(addScript);
 
       window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement(
+        new window.google!.translate.TranslateElement(
           {
             pageLanguage: "en",
             includedLanguages: "en,de,es,it",
@@ -84,7 +99,7 @@ export default function Header1({
         className={`header header-fixed sticky-bar ${scroll ? "stick" : ""}`}
       >
         <div className="top-bar top-bar-2 top-bar-3 bg-transparent">
-          <div className="container-fluid">
+          <div className="container-fluid px-4">
             <div className="text-header-info">
               <Link
                 className="phone-head text-white"
@@ -128,7 +143,7 @@ export default function Header1({
               </Link>
             </div>
             <div className="top-right-header">
-              <Dropdown className="d-none d-xl-inline-block box-dropdown-cart align-middle head-currency">
+              <Dropdown className="d-xl-inline-block box-dropdown-cart align-middle head-currency">
                 <Dropdown.Toggle
                   as="span"
                   className="text-14-medium icon-list icon-cart"
@@ -157,7 +172,7 @@ export default function Header1({
               </Dropdown>
 
               <Dropdown
-                className="d-none d-xl-inline-block box-dropdown-cart align-middle head-currency"
+                className="d-xl-inline-block box-dropdown-cart align-middle head-currency"
                 style={{ marginLeft: "1rem" }}
               >
                 <Dropdown.Toggle
@@ -190,7 +205,7 @@ export default function Header1({
             </div>
           </div>
         </div>
-        <div className="container-fluid">
+        <div className="container-fluid p-3 px-sm-5">
           <div className="main-header">
             <div className="header-left">
               <div className="header-logo">
@@ -223,7 +238,7 @@ export default function Header1({
                   </ul>
                 </nav>
               </div>
-              <div className="header-right">
+              <div className="d-flex gap-2">
                 <div
                   className="burger-icon-2 burger-icon-white"
                   onClick={handleOffcanvas}

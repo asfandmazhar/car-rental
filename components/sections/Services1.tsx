@@ -71,6 +71,24 @@ export default function Services1() {
           </div>
         </div>
 
+        {!loading && services.length === 0 ? (
+          <SwiperSlide>
+            <div
+              className="col-12 text-center text-muted fw-bold py-5"
+              style={{
+                border: "1px solid rgba(0,0,0,0.1)",
+                backgroundColor: "rgba(0,0,0,0.05)",
+                borderRadius: "1rem",
+                marginTop: "1rem",
+              }}
+            >
+              No services available at the moment.
+            </div>
+          </SwiperSlide>
+        ) : (
+          ""
+        )}
+
         <div className="box-list-featured">
           <div className="box-swiper mt-0">
             <Swiper
@@ -95,12 +113,6 @@ export default function Services1() {
                 <SwiperSlide>
                   <div className="text-center text-red-500 w-full py-20">
                     {error}
-                  </div>
-                </SwiperSlide>
-              ) : services.length === 0 ? (
-                <SwiperSlide>
-                  <div className="text-center text-gray-500 w-full py-20">
-                    No services available at the moment.
                   </div>
                 </SwiperSlide>
               ) : (

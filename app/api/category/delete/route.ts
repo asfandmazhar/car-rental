@@ -2,6 +2,7 @@ import { connectDB } from "@/config/dbConfig";
 import Category from "@/models/categoryModel";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserFromToken } from "@/helpers/getUserFromToken";
+export const dynamic = "force-dynamic";
 
 interface TokenUser {
   _id: string;
